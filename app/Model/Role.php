@@ -6,11 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    /*
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+    */
+
     protected $table = 'roles';
 
-    protected $fillable = [
-        'name','display_name','description'
-    ];
+    protected $guarded = [];
 
     public function user()
     {

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Model\Role;
 use Illuminate\Http\Request;
-use App\Http\Resources\RoleResource;
+use App\Http\Resources\UserResource;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return RoleResource::collection(Role::latest()->get());
+        return UserResource::collection(User::latest()->get());
     }
 
     /**
@@ -27,43 +28,43 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        Role::create($request->all());
+        User::create($request->all());
         return response('Created', Response::HTTP_CREATED);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Role  $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(User $user)
     {
-        return new RoleResource($role);
+        return new RoleResource($user);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Role  $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, User $user)
     {
-        $role->update($request->all());
+        $user->update($request->all());
         return response('Updated', Response::HTTP_ACCEPTED);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Role  $role
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(User $user)
     {
-        $role->delete();
+        $user->delete();
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }
